@@ -9,12 +9,29 @@ import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
 
 class App extends React.Component {
+  // componentDidUpdate() {
+  //   const { loading } = this.state;
+  //   console.log(loading, history);
+  //   const { history } = this.props;
+  //   if (loading === true) {
+  //     history.push('/search');
+  //   }
+  // }
+
   render() {
     return (
       <div>
         <Switch>
-          <Route exact path="/" component={ Login } />
-          <Route exact path="/search" component={ Search } />
+          <Route
+            exact
+            path="/"
+            render={ (props) => (<Login { ...props } />) }
+          />
+          <Route
+            exact
+            path="/search"
+            render={ () => (<Search />) }
+          />
           <Route exact path="/album/:id" component={ Album } />
           <Route exact path="/favorites" component={ Favorites } />
           <Route exact path="/profile" component={ Profile } />
