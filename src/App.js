@@ -9,15 +9,6 @@ import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
 
 class App extends React.Component {
-  // componentDidUpdate() {
-  //   const { loading } = this.state;
-  //   console.log(loading, history);
-  //   const { history } = this.props;
-  //   if (loading === true) {
-  //     history.push('/search');
-  //   }
-  // }
-
   render() {
     return (
       <div>
