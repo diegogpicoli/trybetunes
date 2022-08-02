@@ -54,7 +54,6 @@ class Search extends Component {
         </Link>
       </div>
     ));
-    console.log(listaAlbum);
     return (
       <div data-testid="page-search">
         <Header />
