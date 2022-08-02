@@ -1,22 +1,51 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { addSong } from '../services/favoriteSongsAPI';
+import Carregando from './Carregando';
 
 class MusicCard extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      loading: false,
+      listCheck: [],
+    };
+  }
+
+  songAdd = async (params, event) => {
+    console.log(event.target.checked);
+    this.setState({
+      loading: true,
+    });
+    await addSong(params);
+    if (!event.target.checked) {
+      this.setState((valorAnterior) => ({
+        listCheck: [...valorAnterior.listCheck, params],
+      }));
+    }
+    this.setState({
+      loading: false,
+    });
+  }
+
   render() {
-    // const { trackName, previewUrl } = this.state;
     const { object } = this.props;
+    const { loading, listCheck } = this.state;
     const listaMusica = [];
     if (object.length > 0) {
       for (let index = 1; index < object.length; index += 1) {
         listaMusica.push(object[index]);
       }
     }
-    console.log(listaMusica);
     return (
       <div>
-        { object.length > 0
+        { loading && <Carregando />}
+
+        <div>
+          { object.length > 0
         && null}
-        { object.length > 0
+          { object.length > 0
         && listaMusica.map((elemento) => (
           <div key={ elemento.trackName }>
             <p>{ elemento.trackName }</p>
@@ -28,8 +57,24 @@ class MusicCard extends Component {
               <code>audio</code>
               .
             </audio>
+            <label
+              data-testid={ `checkbox-music-${elemento.trackId}` }
+              htmlFor="favorite"
+            >
+              Favorito
+              <input
+                type="checkbox"
+                name=""
+                checked={ listCheck
+                  .some((checkAtual) => checkAtual.trackId === elemento.trackId) }
+                id="favorite"
+                onChange={ (event) => this.songAdd(elemento, event) }
+              />
+            </label>
           </div>
         ))}
+        </div>
+
       </div>
     );
   }
