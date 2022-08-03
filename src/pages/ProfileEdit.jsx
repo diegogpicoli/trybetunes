@@ -42,7 +42,13 @@ class ProfileEdit extends Component {
   }
 
   updateUserSave = async (params) => {
+    this.setState({
+      loading: true,
+    });
     await updateUser(params);
+    this.setState({
+      loading: false,
+    });
     const { history } = this.props;
     history.push('/profile');
   }
