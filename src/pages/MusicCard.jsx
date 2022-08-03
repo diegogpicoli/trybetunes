@@ -58,12 +58,12 @@ class MusicCard extends Component {
               .
             </audio>
             <label
-              data-testid={ `checkbox-music-${elemento.trackId}` }
               htmlFor="favorite"
             >
               Favorito
               <input
                 type="checkbox"
+                data-testid={ `checkbox-music-${elemento.trackId}` }
                 name=""
                 checked={ listCheck
                   .some((checkAtual) => checkAtual.trackId === elemento.trackId) }
