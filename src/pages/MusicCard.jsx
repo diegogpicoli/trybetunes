@@ -46,17 +46,16 @@ class MusicCard extends Component {
     const { object } = this.props;
     const { loading, listCheck } = this.state;
     const listaMusica = object
-      .filter((elemento) => elemento.wrapperType !== 'collection');
+      .filter((elemento) => elemento.trackId);
+    // const listaMusica = [];
     // if (object.length > 0) {
     //   for (let index = 0; index < object.length; index += 1) {
-    //     if (object.wrapperType === 'track') { listaMusica.push(object[index]); }
+    //     listaMusica.push(object[index]);
     //   }
     // }
     return (
       <div>
         <div>
-          { object.length > 0
-        && null}
           { loading ? <Carregando /> : null }
           { object.length > 0
         && listaMusica.map((elemento) => (

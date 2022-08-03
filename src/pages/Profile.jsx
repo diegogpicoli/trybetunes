@@ -24,10 +24,6 @@ class Profile extends Component {
 
   render() {
     const { profile } = this.state;
-    if (profile.length !== 0) {
-      console.log(profile);
-    }
-
     return (
       <div data-testid="page-profile">
         <Header />
