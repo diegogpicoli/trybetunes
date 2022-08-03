@@ -45,12 +45,13 @@ class MusicCard extends Component {
   render() {
     const { object } = this.props;
     const { loading, listCheck } = this.state;
-    const listaMusica = [];
-    if (object.length > 0) {
-      for (let index = 1; index < object.length; index += 1) {
-        listaMusica.push(object[index]);
-      }
-    }
+    const listaMusica = object
+      .filter((elemento) => elemento.wrapperType !== 'collection');
+    // if (object.length > 0) {
+    //   for (let index = 0; index < object.length; index += 1) {
+    //     if (object.wrapperType === 'track') { listaMusica.push(object[index]); }
+    //   }
+    // }
     return (
       <div>
         <div>
