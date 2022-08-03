@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Carregando from './Carregando';
 
 class MusicCard extends Component {
@@ -10,14 +10,12 @@ class MusicCard extends Component {
     this.state = {
       loading: false,
       listCheck: [],
-      listaRecovery: [],
     };
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     const recoveryFavoriteSong = async () => {
       const data = await getFavoriteSongs();
-      console.log(data);
       this.setState({
         listCheck: data,
       });
@@ -26,7 +24,6 @@ class MusicCard extends Component {
   }
 
   songAdd = async (params, event) => {
-    console.log(event.target.checked);
     this.setState({
       loading: true,
     });
@@ -34,11 +31,15 @@ class MusicCard extends Component {
     if (!event.target.checked) {
       this.setState((valorAnterior) => ({
         listCheck: [...valorAnterior.listCheck, params],
+        loading: false,
+      }));
+    } else {
+      await removeSong(params);
+      this.setState((valorAnterior) => ({
+        listCheck: valorAnterior.listCheck.filter((elemento) => elemento !== params),
+        loading: false,
       }));
     }
-    this.setState({
-      loading: false,
-    });
   }
 
   render() {
@@ -52,11 +53,10 @@ class MusicCard extends Component {
     }
     return (
       <div>
-        { loading && <Carregando />}
-
         <div>
           { object.length > 0
         && null}
+          { loading ? <Carregando /> : null }
           { object.length > 0
         && listaMusica.map((elemento) => (
           <div key={ elemento.trackName }>
