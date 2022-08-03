@@ -123,4 +123,10 @@ class ProfileEdit extends Component {
   }
 }
 
+ProfileEdit.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
 export default ProfileEdit;
