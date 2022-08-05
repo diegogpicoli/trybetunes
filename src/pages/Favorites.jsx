@@ -43,30 +43,40 @@ class Favorites extends Component {
         { loading && <Carregando />}
         { listCheck.length > 0
         && listCheck.map((elemento) => (
-          <div key={ elemento.trackName }>
-            <p>{ elemento.trackName }</p>
-            <audio data-testid="audio-component" src={ elemento.previewUrl } controls>
-              <track kind="captions" />
-              O seu navegador não suporta o elemento
-              {' '}
-              {' '}
-              <code>audio</code>
-              .
-            </audio>
-            <label
-              htmlFor="favorite"
-            >
-              Favorita
-              <input
-                type="checkbox"
-                data-testid={ `checkbox-music-${elemento.trackId}` }
-                name=""
-                checked={ listCheck
-                  .some((checkAtual) => checkAtual.trackId === elemento.trackId) }
-                id="favorite"
-                onChange={ () => this.songRemove(elemento) }
+          <div className="divMusic" key={ elemento.trackName }>
+            <div className="divMusic2">
+              <img
+                className="imgFavorite"
+                src={ elemento.artworkUrl100
+                  .replace('100x100bb', '500x500bb') }
+                alt="imagem"
               />
-            </label>
+              <div className="musicFavorite">
+                <p>{ elemento.trackName }</p>
+                <audio data-testid="audio-component" src={ elemento.previewUrl } controls>
+                  <track kind="captions" />
+                  O seu navegador não suporta o elemento
+                  {' '}
+                  {' '}
+                  <code>audio</code>
+                  .
+                </audio>
+                <label
+                  htmlFor={ elemento.trackId }
+                >
+                  Favorita
+                  <input
+                    type="checkbox"
+                    data-testid={ `checkbox-music-${elemento.trackId}` }
+                    name=""
+                    checked={ listCheck
+                      .some((checkAtual) => checkAtual.trackId === elemento.trackId) }
+                    id={ elemento.trackId }
+                    onChange={ () => this.songRemove(elemento) }
+                  />
+                </label>
+              </div>
+            </div>
           </div>
         ))}
       </div>

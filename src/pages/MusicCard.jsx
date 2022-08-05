@@ -47,20 +47,14 @@ class MusicCard extends Component {
     const { loading, listCheck } = this.state;
     const listaMusica = object
       .filter((elemento) => elemento.trackId);
-    // const listaMusica = [];
-    // if (object.length > 0) {
-    //   for (let index = 0; index < object.length; index += 1) {
-    //     listaMusica.push(object[index]);
-    //   }
-    // }
     return (
       <div>
         <div>
           { loading ? <Carregando /> : null }
           { object.length > 0
         && listaMusica.map((elemento) => (
-          <div key={ elemento.trackName }>
-            <p>{ elemento.trackName }</p>
+          <div className="musicPlayer" key={ elemento.trackName }>
+            <h3>{ elemento.trackName }</h3>
             <audio data-testid="audio-component" src={ elemento.previewUrl } controls>
               <track kind="captions" />
               O seu navegador não suporta o elemento
@@ -70,18 +64,20 @@ class MusicCard extends Component {
               .
             </audio>
             <label
-              htmlFor="favorite"
+              htmlFor={ elemento.trackId }
+              className="labelFavoritar"
             >
-              Favorito
               <input
+                className="inputCheckbox"
                 type="checkbox"
                 data-testid={ `checkbox-music-${elemento.trackId}` }
                 name=""
                 checked={ listCheck
                   .some((checkAtual) => checkAtual.trackId === elemento.trackId) }
-                id="favorite"
+                id={ elemento.trackId }
                 onChange={ (event) => this.songAdd(elemento, event) }
               />
+              Favoritar
             </label>
           </div>
         ))}

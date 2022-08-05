@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
-import Carregando from './Carregando';
+import './style.css';
+import imagem from './imgs/trybeTunesIcone.png';
 
 class Header extends Component {
   constructor() {
@@ -32,15 +33,36 @@ class Header extends Component {
 
     return (
       <header data-testid="header-component">
-        { loading ? <Carregando />
-          : (
-            <div>
-              <p data-testid="header-user-name">{ userName }</p>
-              <Link data-testid="link-to-search" to="/search">Pesquisa</Link>
-              <Link data-testid="link-to-favorites" to="/favorites">Favoritos</Link>
-              <Link data-testid="link-to-profile" to="/profile">Perfil</Link>
-            </div>
-          )}
+        <div className="header">
+          <img src={ imagem } alt="" />
+          { loading ? <div className="usuario">Carregando...</div>
+            : (
+              <div className="usuario">
+                <div className="simulaImg">{ userName[0]}</div>
+                <p data-testid="header-user-name">{ userName }</p>
+              </div>
+            )}
+
+        </div>
+        <div className="links">
+          <Link className="link" data-testid="link-to-search" to="/search">Pesquisa</Link>
+          <Link
+            className="link white"
+            data-testid="link-to-favorites"
+            to="/favorites"
+          >
+            Favoritos
+
+          </Link>
+          <Link
+            className="link white"
+            data-testid="link-to-profile"
+            to="/profile"
+          >
+            Perfil
+
+          </Link>
+        </div>
       </header>
     );
   }

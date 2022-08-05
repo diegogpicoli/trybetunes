@@ -42,14 +42,21 @@ class Search extends Component {
     const minInput = 2;
 
     const listaAlbum = album.map((elemento) => (
-      <div key={ elemento.artistId }>
-        <img src={ elemento.artworkUrl100 } alt="imagem" />
-        <p>{ elemento.collectionName }</p>
+      <div
+        className="album"
+        key={ elemento.artistId }
+      >
+        <img
+          src={ elemento.artworkUrl100
+            .replace('100x100bb', '500x500bb') }
+          alt="imagem"
+        />
+        <h3>{ elemento.collectionName }</h3>
         <Link
           data-testid={ `link-to-album-${elemento.collectionId}` }
           to={ `/album/${elemento.collectionId}` }
         >
-          Album
+          <div className="buttonMusic">Album</div>
 
         </Link>
       </div>
@@ -60,30 +67,41 @@ class Search extends Component {
         { loading ? <Carregando />
           : (
             <div>
-              <input
-                data-testid="search-artist-input"
-                type="text"
-                name="search"
-                id=""
-                onChange={ this.onInputChange }
-              />
-              <button
-                data-testid="search-artist-button"
-                disabled={ search.length < minInput }
-                type="submit"
-                onClick={ () => this.searchAlbum() }
-              >
-                Procurar
+              <div>
+                <div className="inputSearch">
+                  <input
+                    data-testid="search-artist-input"
+                    type="text"
+                    name="search"
+                    id=""
+                    onChange={ this.onInputChange }
+                  />
+                  <button
+                    className="buttonSearch"
+                    data-testid="search-artist-button"
+                    disabled={ search.length < minInput }
+                    type="submit"
+                    onClick={ () => this.searchAlbum() }
+                  >
+                    Procurar
 
-              </button>
-              { artista.length > 0 && (
-                <p>
-                  Resultado de álbuns de:
-                  {' '}
-                  { artista }
-                </p>
-              )}
-              { album.length > 0 ? listaAlbum : <p>Nenhum álbum foi encontrado</p>}
+                  </button>
+                </div>
+                { artista.length > 0 && (
+                  <center>
+                    <br />
+                    <h2>
+                      Resultado de álbuns de:
+                      {' '}
+                      { artista }
+                    </h2>
+
+                  </center>
+                )}
+              </div>
+              <div className="albuns">
+                { album.length > 0 ? listaAlbum : <h2>Nenhum álbum foi encontrado</h2>}
+              </div>
             </div>
           )}
       </div>

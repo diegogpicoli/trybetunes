@@ -24,20 +24,31 @@ class Album extends Component {
         banda: object,
         name: object[0].artistName,
         albumName: object[0].collectionName,
+        imagem: object[0].artworkUrl100.replace('100x100bb', '500x500bb'),
       });
     };
     return retorna();
   }
 
   render() {
-    const { banda, name, albumName } = this.state;
+    const { banda, name, albumName, imagem } = this.state;
+    console.log(banda[0]);
     return (
       <div data-testid="page-album">
         <Header />
-        Album
-        <p data-testid="album-name">{ albumName }</p>
-        <p data-testid="artist-name">{ name }</p>
-        <MusicCard object={ banda } />
+        <div className="albumFull">
+          <div className="albumPart1">
+            <img
+              className="imgAlbum"
+              src={ imagem }
+              alt="ola"
+            />
+            <h2 data-testid="album-name">{ albumName }</h2>
+            <p data-testid="artist-name">{ name }</p>
+            <div />
+          </div>
+          <MusicCard object={ banda } />
+        </div>
       </div>
     );
   }

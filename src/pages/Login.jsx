@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { createUser } from '../services/userAPI';
 import Carregando from './Carregando';
+import imagem from './imgs/trybeTunes.png';
 
 class Login extends Component {
   constructor() {
@@ -37,10 +38,11 @@ class Login extends Component {
     const minInput = 3;
 
     return (
-      <div>
+      <div className="flexCenter">
         { loading ? <Carregando />
           : (
-            <div data-testid="page-login">
+            <div className="login" data-testid="page-login">
+              <img src={ imagem } alt="" />
               <input
                 type="text"
                 name="nameUser"
