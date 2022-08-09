@@ -31,6 +31,7 @@ class App extends React.Component {
             path="/profile/edit"
             render={ (props) => <ProfileEdit { ...props } /> }
           />
+          <Route component={ NotFound } />
         </Switch>
       </div>
     );
