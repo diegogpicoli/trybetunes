@@ -2,6 +2,7 @@
   "name": "trybetunes",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://diegogpicoli.github.io/trybetunes",
   "engines": {
     "node": "16"
   },
@@ -21,7 +22,6 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^1.1.2"
   },
-  "homepage": "https://username.github.io/app-toot-name",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
